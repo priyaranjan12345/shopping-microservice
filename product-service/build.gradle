@@ -50,6 +50,9 @@ dependencies {
     implementation platform('org.testcontainers:testcontainers-bom:1.18.0')
     testImplementation "org.testcontainers:mongodb"
     testImplementation "org.testcontainers:junit-jupiter"
+
+    // eureka netflix
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 }
 
 dependencyManagement {
