@@ -23,7 +23,7 @@ public class InventoryController {
 
     @GetMapping("/skuCodesAvailability")
     @ResponseStatus(HttpStatus.OK)
-    public List<InventoryResponse> skuCodesAvailability(@RequestBody List<String> skuCodes) {
+    public List<InventoryResponse> skuCodesAvailability(@RequestParam List<String> skuCodes) {
         return inventoryService.isSkuCodesPresent(skuCodes);
     }
 }
