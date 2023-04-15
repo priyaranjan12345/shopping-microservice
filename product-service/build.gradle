@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+group 'org.vlogshero.product-service'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates'
+    }
+}
+
+ext {
+    set('springCloudVersion', "2022.0.2")
+}
+
+bootJar {
+    enabled = true
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
+
+    // spring boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // mongodb
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    // lombok
+    implementation 'org.projectlombok:lombok:1.18.26'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // logger
+    implementation 'org.slf4j:slf4j-api:2.0.5'
+
+    // open api
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0"
+
+    // testing
+    implementation platform('org.testcontainers:testcontainers-bom:1.18.0')
+    testImplementation "org.testcontainers:mongodb"
+    testImplementation "org.testcontainers:junit-jupiter"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
